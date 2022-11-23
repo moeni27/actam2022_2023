@@ -13,8 +13,7 @@ Tone.Destination.volume.value = -9; // this value is in dB
 let main_bpm = 120;
 let main_loop_interval = "1m";
 let scaleNotes = Tonal.Scale.get("C4 major").notes;
-
-
+let ready = false;
 
 /*----------HELPER FUNCTIONS-------------*/
 let modulo = function(n, m) {
@@ -108,7 +107,55 @@ let perc1_notes = '7-15'
 
 
 
-document.getElementById("setupButton").onclick = function() {
+
+
+let p5_instance = function(p5c){
+
+    let x = 100;
+    let y = 100;
+
+
+    p5c.windowResized = function() {
+        p5c.resizeCanvas(p5c.windowWidth, p5c.windowHeight);
+    }
+
+    p5c.setup = function() {
+        p5c.createCanvas(p5c.windowWidth,p5c.windowHeight);
+        console.log('canvas created!');
+    };
+
+    p5c.draw = function() {
+        p5c.background(0);
+        if (!ready) {
+
+            p5c.fill(255);
+            p5c.textAlign(p5c.CENTER);
+            p5c.text("CLICK TO START", p5c.width / 2, p5c.height / 2);
+        }else{
+            //inject some graphics.
+
+        }
+
+
+    };
+
+    p5c.mousePressed = function() {
+        if (!ready) {
+            initializeAudio();
+            ready = true;
+        } else {
+            // click again to start/stop...
+            if (Tone.Transport.state === "paused") Tone.Transport.start();
+            else if (Tone.Transport.state === "started") Tone.Transport.pause();
+        }
+    }
+}
+
+let myp5 = new p5(p5_instance);
+
+
+function initializeAudio() {
+
     Tone.start().then(()=>{
         Tone.Transport.bpm.value = main_bpm;
         Tone.Transport.start();

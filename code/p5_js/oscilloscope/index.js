@@ -21,15 +21,16 @@ function windowResized() {
 }
 
 function draw() {
-    background(110);
-    stroke('black');
-    strokeWeight(4);
+    background('black');
+    stroke('110');
+    strokeWeight(10);
     bufferArray = waveform.getValue(0);
     let x,y;
 
     /* 1. POINTS
     for(let i = 0; i < bufferArray.length; i++) {
-        // Give me a value between 0 and windowWidth which is proportional to the value of i between 0 and buffer.length
+        // Give me a value between 0 and windowWidth which
+        // is proportional to the value of i between 0 and buffer.length
         x = map(i,0,bufferArray.length, 0, windowWidth);
         // Waveform values go from -1 to 1
         y = map(bufferArray[i], -1,1,0, windowHeight);
@@ -48,10 +49,12 @@ function draw() {
         y2 = map(bufferArray[i], -1,1,0, windowHeight);
 
         line(x1,y1, x2,y2);
-    }
-    */
+    }*/
+
 
     let start_point = 0;
+
+
     for(let i = 0; i < bufferArray.length; i++) {
         if (bufferArray[i - 1] < 0 && bufferArray[i] >= 0){
             start_point = i;
@@ -71,6 +74,8 @@ function draw() {
 
         line(x1,y1, x2,y2);
     }
+
+    console.log('-')
 
 
 }

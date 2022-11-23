@@ -34,6 +34,9 @@ p5_instance = function(p5c){
     };
 
     p5c.draw = function() {
+
+        tone_oscillator.frequency.value = p5c.mouseX;
+
         p5c.background(110);
         p5c.stroke('black');
         p5c.strokeWeight(4);
@@ -63,8 +66,6 @@ p5_instance = function(p5c){
 
     };
 }
-
-
 
 myp5 = new p5(p5_instance);
 
