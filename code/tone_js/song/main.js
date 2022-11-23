@@ -9,7 +9,7 @@ Tonal = require('tonal');
 */
 
 /*----------GLOBAL ------------*/
-Tone.Destination.volume.value = -9; // this value is in dB
+Tone.Destination.volume.value = -9; // this value is in dBn
 let main_bpm = 120;
 let main_loop_interval = "1m";
 let scaleNotes = Tonal.Scale.get("C4 major").notes;
